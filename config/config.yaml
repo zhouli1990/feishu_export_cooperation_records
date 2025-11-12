@@ -1,0 +1,57 @@
+# 配置说明：
+# - start_date/end_date：拉取的起止日期（含）；格式 YYYY-MM-DD。
+# - split_days_sequence：当机器人消息“共计”=max_count_per_file（通常为1000）时，按序缩小窗口。
+# - max_count_per_file：飞书单次导出上限，用于判断是否需要细分窗口。
+# - max_concurrency：后续并发限制的预留参数（当前阶段不启用）。
+# - retry：导出/下载时的通用重试策略（后续步骤启用）。
+# - export_headers：导出接口所需头信息，来自抓包；无需长期缓存。
+# - download：网页自动化下载相关配置（Playwright）。
+# - merge：最终合并输出的文件命名模板，其中 {TOTAL} 为合并总条数。
+# - run_state：窗口运行状态CSV（断点续跑的“事实源”）。
+# - log.level：日志级别。
+
+# 任务时间范围（含）
+start_date: "2025-11-01"
+end_date: "2025-11-15"
+
+# 时间窗口拆分设置
+split_days_sequence: [7, 3, 1]   # 命中阈值时依次缩小为7天→3天→1天
+max_count_per_file: 1000         # 机器人消息“共计”达到该值时触发细分
+max_concurrency: 2               # 并发数（后续步骤使用）
+
+# 通用重试策略（后续步骤使用）
+retry:
+  max_attempts: 3                # 最大重试次数
+  backoff_seconds: 5             # 重试退避秒数
+
+# 导出接口请求头（来自抓包）
+export_headers:
+  timezone_offset: -480          # 时区偏移（分钟），-480=UTC+8
+  cookie: "session=XN0YXJ0-1b2m25be-c888-44b3-9004-57ea6250f2b4-WVuZA; session_list=XN0YXJ0-a87n6145-d9bc-410f-8b57-50ed4f94ed1e-WVuZA_XN0YXJ0-1b2m25be-c888-44b3-9004-57ea6250f2b4-WVuZA_XN0YXJ0-4ecq9fde-8a23-4554-8566-5ab4e4dcb336-WVuZA_XN0YXJ0-ec5pafc3-811d-4510-ad3f-7a6403001832-WVuZA;"                     # 从抓包填写
+  content_type: "application/json"
+
+# 网页自动化（Playwright）
+download:
+  driver: "playwright"           # 浏览器自动化引擎
+  user_data_dir: "./.browser_profile"  # 可选：持久化会话，减少频繁扫码
+  download_dir: "./output/raw"   # 下载目录（相对工作区）
+  bot_chat_name: "飞书合同"       # 机器人会话名称
+  max_wait_seconds: 90           # 单窗口最大等待消息时长（秒）
+  clear_chat_each_round: false    # 每轮下载前清空聊天记录
+
+# 合并与输出
+merge:
+  output_path_pattern: "./output/merged/合同协同_merge_共{TOTAL}条.xlsx"
+
+# 运行状态CSV（断点续跑）
+run_state:
+  csv_path: "./state/run_windows.csv"  # CSV 存放位置（相对工作区）
+  encoding: "utf-8-sig"                 # Excel 友好编码
+  line_ending: "crlf"                   # Windows 推荐换行符
+  flush: true                            # 每条记录立即落盘
+  resume_mode: "resume"                 # resume|full（默认断点续跑）
+  completed_statuses: ["with_data", "no_data", "manual"]  # 视为完成的状态
+
+# 日志
+log:
+  level: "DEBUG"

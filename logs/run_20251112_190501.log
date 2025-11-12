@@ -1,0 +1,17 @@
+2025-11-12 19:05:01,566 | INFO | root | [启动] 飞书合同协同记录批量拉取
+2025-11-12 19:05:01,566 | INFO | root | 日志文件: D:\li.zhou_158712\Desktop\常用脚本\70批量拉取飞书合同协同记录\logs\run_20251112_190501.log
+2025-11-12 19:05:01,567 | INFO | root | 时间范围: 2025-11-01 → 2025-11-15
+拆分序列: [7, 3, 1]
+阈值: max_count_per_file=1000
+断点续跑: resume (已完成态: ['with_data', 'no_data', 'manual'])
+下载目录: ./output/raw  机器人: 飞书合同  超时: 90s
+2025-11-12 19:05:01,567 | INFO | root | [执行] 开始编排（Step 5）...
+2025-11-12 19:05:01,568 | INFO | scripts.orchestrator | run: initial_windows=[('2025-11-01', '2025-11-07'), ('2025-11-08', '2025-11-14'), ('2025-11-15', '2025-11-15')]
+2025-11-12 19:05:01,569 | DEBUG | scripts.web_download | ensure_dir: ./output/raw
+2025-11-12 19:05:01,569 | DEBUG | asyncio | Using proactor: IocpProactor
+2025-11-12 19:05:20,091 | DEBUG | scripts.orchestrator | run: skip completed window_id=20251101-20251107 fr=2025-11-01 to=2025-11-07
+2025-11-12 19:05:20,092 | DEBUG | scripts.orchestrator | run: skip completed window_id=20251108-20251114 fr=2025-11-08 to=2025-11-14
+2025-11-12 19:05:20,092 | DEBUG | scripts.orchestrator | run: skip completed window_id=20251115-20251115 fr=2025-11-15 to=2025-11-15
+2025-11-12 19:05:21,067 | INFO | root | [完成] 编排结束。状态已写入 state/run_windows.csv
+2025-11-12 19:05:21,067 | INFO | root | [执行] 开始合并（Step 6）...
+2025-11-12 19:05:22,254 | INFO | root | [完成] 合并输出: output\merged\合同协同_merge_共868条.xlsx

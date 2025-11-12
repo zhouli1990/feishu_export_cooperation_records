@@ -1,0 +1,20 @@
+2025-11-12 18:51:11,831 | INFO | root | [启动] 飞书合同协同记录批量拉取
+2025-11-12 18:51:11,831 | INFO | root | 日志文件: D:\li.zhou_158712\Desktop\常用脚本\70批量拉取飞书合同协同记录\logs\run_20251112_185111.log
+2025-11-12 18:51:11,832 | INFO | root | 时间范围: 2025-11-01 → 2025-11-15
+拆分序列: [7, 3, 1]
+阈值: max_count_per_file=1000
+断点续跑: resume (已完成态: ['with_data', 'no_data', 'manual'])
+下载目录: ./output/raw  机器人: 飞书合同  超时: 90s
+2025-11-12 18:51:11,832 | INFO | root | [执行] 开始编排（Step 5）...
+2025-11-12 18:51:11,833 | INFO | scripts.orchestrator | run: initial_windows=[('2025-11-01', '2025-11-07'), ('2025-11-08', '2025-11-14'), ('2025-11-15', '2025-11-15')]
+2025-11-12 18:51:11,835 | DEBUG | scripts.web_download | ensure_dir: ./output/raw
+2025-11-12 18:51:11,835 | DEBUG | asyncio | Using proactor: IocpProactor
+2025-11-12 18:51:32,571 | WARNING | scripts.web_download | ensure_chat_open: open_tag_failed
+2025-11-12 18:51:32,571 | WARNING | scripts.web_download | ensure_chat_open_on_init: open_tag_failed
+2025-11-12 18:51:32,571 | DEBUG | scripts.orchestrator | split_process: start fr=2025-11-01 to=2025-11-07 level=0 days=7
+2025-11-12 18:51:50,800 | WARNING | scripts.web_download | ensure_chat_open: open_tag_failed
+2025-11-12 18:51:50,801 | DEBUG | scripts.orchestrator | split_process: start fr=2025-11-08 to=2025-11-14 level=0 days=7
+2025-11-12 18:52:01,359 | ERROR | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-13' coro=<BrowserContext.close() running at C:\Users\li.zhou_158712\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_browser_context.py:584> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\li.zhou_158712\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_sync_base.py:111]>
+2025-11-12 18:52:01,359 | ERROR | asyncio | Task was destroyed but it is pending!
+task: <Task pending name='Task-12' coro=<Page.goto() done, defined at C:\Users\li.zhou_158712\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_page.py:548> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\li.zhou_158712\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_sync_base.py:111, ProtocolCallback.__init__.<locals>.cb() at C:\Users\li.zhou_158712\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py:230]>

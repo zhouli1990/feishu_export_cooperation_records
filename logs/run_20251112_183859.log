@@ -1,0 +1,21 @@
+2025-11-12 18:38:59,932 | INFO | root | [启动] 飞书合同协同记录批量拉取
+2025-11-12 18:38:59,933 | INFO | root | 日志文件: D:\li.zhou_158712\Desktop\常用脚本\70批量拉取飞书合同协同记录\logs\run_20251112_183859.log
+2025-11-12 18:38:59,933 | INFO | root | 时间范围: 2025-11-01 → 2025-11-15
+拆分序列: [7, 3, 1]
+阈值: max_count_per_file=1000
+断点续跑: resume (已完成态: ['with_data', 'no_data', 'manual'])
+下载目录: ./output/raw  机器人: 飞书合同  超时: 90s
+2025-11-12 18:38:59,933 | INFO | root | [执行] 开始编排（Step 5）...
+2025-11-12 18:38:59,935 | INFO | scripts.orchestrator | run: initial_windows=[('2025-11-01', '2025-11-07'), ('2025-11-08', '2025-11-14'), ('2025-11-15', '2025-11-15')]
+2025-11-12 18:39:00,252 | DEBUG | scripts.web_download | ensure_dir: ./output/raw
+2025-11-12 18:39:00,253 | DEBUG | asyncio | Using proactor: IocpProactor
+2025-11-12 18:39:19,190 | DEBUG | scripts.orchestrator | split_process: start fr=2025-11-01 to=2025-11-07 level=0 days=7
+2025-11-12 18:39:36,367 | DEBUG | scripts.http_export | compose_headers: keys=['Timezone-Offset', 'Cookie', 'Content-Type', 'Accept', 'User-Agent'] cookie_present=True
+2025-11-12 18:39:36,367 | DEBUG | scripts.http_export | build_body: from=2025-11-01 to=2025-11-07 keyword= tab=0 extra_keys=[]
+2025-11-12 18:39:36,368 | DEBUG | scripts.http_export | submit_export: url=https://contract.feishu.cn/clm/api/cooperation/exportCooperationRecords timeout=30 attempts/backoff=3/5
+2025-11-12 18:39:36,368 | DEBUG | scripts.http_export | submit_export: body={'keyword': '', 'searchTabEnumCode': 0, 'searchCooperationByCreateTime': ['2025-11-01', '2025-11-07']}
+2025-11-12 18:39:36,368 | DEBUG | scripts.http_export | submit_export: attempt=1/3
+2025-11-12 18:39:36,373 | DEBUG | urllib3.connectionpool | Starting new HTTPS connection (1): contract.feishu.cn:443
+2025-11-12 18:39:37,381 | DEBUG | urllib3.connectionpool | https://contract.feishu.cn:443 "POST /clm/api/cooperation/exportCooperationRecords HTTP/1.1" 200 None
+2025-11-12 18:39:37,382 | DEBUG | scripts.http_export | submit_export: status=200 text_len=133
+2025-11-12 18:39:37,382 | DEBUG | scripts.http_export | submit_export: success
