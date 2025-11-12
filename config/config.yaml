@@ -11,8 +11,8 @@
 # - log.level：日志级别。
 
 # 任务时间范围（含）
-start_date: "2025-11-01"
-end_date: "2025-11-15"
+start_date: "2025-03-01"
+end_date: "2025-10-01"
 
 # 时间窗口拆分设置
 split_days_sequence: [7, 3, 1]   # 命中阈值时依次缩小为7天→3天→1天
@@ -37,7 +37,6 @@ download:
   download_dir: "./output/raw"   # 下载目录（相对工作区）
   bot_chat_name: "飞书合同"       # 机器人会话名称
   max_wait_seconds: 90           # 单窗口最大等待消息时长（秒）
-  clear_chat_each_round: false    # 每轮下载前清空聊天记录
 
 # 合并与输出
 merge:

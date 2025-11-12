@@ -2,3 +2,4 @@
 config_example.yaml
 output
 state
+logs

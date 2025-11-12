@@ -188,69 +188,6 @@ class BrowserSession:
         declared = self._declared_near(btn_last)
         return (save_path, declared)
 
-    def clear_chat_history(self, max_wait_seconds: int = 15) -> bool:
-        page = self._page
-        opened = False
-        try:
-            btn = page.get_by_role("button", name=re.compile("设置|Setting"))
-            if btn.count() > 0:
-                btn.first.click()
-                opened = True
-        except Exception:
-            try:
-                btn = page.get_by_title(re.compile("设置|Setting"))
-                if btn.count() > 0:
-                    btn.first.click()
-                    opened = True
-            except Exception:
-                try:
-                    btn = page.get_by_text("设置")
-                    if btn.count() > 0:
-                        btn.first.click()
-                        opened = True
-                except Exception:
-                    opened = False
-        if not opened:
-            pass
-        clicked = False
-        try:
-            x = page.get_by_role("button", name=re.compile("清空聊天记录"))
-            if x.count() == 0:
-                x = page.get_by_text("清空聊天记录")
-            x.first.click()
-            clicked = True
-        except Exception:
-            clicked = False
-        if not clicked:
-            return False
-        confirmed = False
-        for txt in ["清空", "确定", "删除", "确认"]:
-            try:
-                y = page.get_by_role("button", name=re.compile(txt))
-                if y.count() > 0:
-                    y.first.click()
-                    confirmed = True
-                    break
-            except Exception:
-                pass
-        if not confirmed:
-            try:
-                page.get_by_text("清空").first.click()
-                confirmed = True
-            except Exception:
-                confirmed = False
-        if not confirmed:
-            return False
-        start = time.time()
-        while time.time() - start < max_wait_seconds:
-            try:
-                if self.snapshot_download_button_count() == 0:
-                    return True
-            except Exception:
-                pass
-            time.sleep(0.5)
-        return False
-
     def close(self) -> None:
         try:
             self._context.close()

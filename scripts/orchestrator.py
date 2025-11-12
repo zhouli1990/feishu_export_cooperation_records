@@ -92,13 +92,6 @@ def _process_leaf_window(cfg: dict, fr: str, to: str, split_level: int, rs_cfg: 
         session.ensure_chat_open()
     except Exception:
         pass
-    dcfg = cfg.get("download", {})
-    clear_each = bool(dcfg.get("clear_chat_each_round", False))
-    if clear_each:
-        try:
-            session.clear_chat_history()
-        except Exception:
-            pass
     try:
         pre_count, pre_sig = session.snapshot_state()
     except Exception:
@@ -130,11 +123,6 @@ def _process_leaf_window(cfg: dict, fr: str, to: str, split_level: int, rs_cfg: 
                                        exception="over_limit_1d", file_path=saved_path,
                                        file_md5=_md5_file(saved_path) if Path(saved_path).exists() else "",
                                        start_time=start_ts, end_time=end_ts))
-        try:
-            if bool(cfg.get("download", {}).get("clear_chat_each_round", False)):
-                session.clear_chat_history()
-        except Exception:
-            pass
         return
 
     if declared < max_count:
@@ -146,11 +134,6 @@ def _process_leaf_window(cfg: dict, fr: str, to: str, split_level: int, rs_cfg: 
                                        file_path=std_path,
                                        file_md5=_md5_file(std_path) if Path(std_path).exists() else "",
                                        start_time=start_ts, end_time=end_ts))
-        try:
-            if bool(cfg.get("download", {}).get("clear_chat_each_round", False)):
-                session.clear_chat_history()
-        except Exception:
-            pass
         return
 
     # declared == max_count 且 window_days>1 的情况在上层处理（触发细分），此处不记录父窗口
@@ -168,13 +151,6 @@ def _split_and_process(cfg: dict, fr: str, to: str, seq: List[int], level: int, 
         session.ensure_chat_open()
     except Exception:
         pass
-    dcfg = cfg.get("download", {})
-    clear_each = bool(dcfg.get("clear_chat_each_round", False))
-    if clear_each:
-        try:
-            session.clear_chat_history()
-        except Exception:
-            pass
     try:
         pre_count, pre_sig = session.snapshot_state()
     except Exception:
@@ -208,11 +184,6 @@ def _split_and_process(cfg: dict, fr: str, to: str, seq: List[int], level: int, 
                 Path(saved_path).unlink(missing_ok=True)  # type: ignore[arg-type]
         except Exception:
             pass
-        try:
-            if bool(cfg.get("download", {}).get("clear_chat_each_round", False)):
-                session.clear_chat_history()
-        except Exception:
-            pass
         sub_windows = generate_initial_windows(fr, to, next_days)
         logger.debug("split_process: sub_windows=%s", sub_windows)
         for sub_fr, sub_to in sub_windows:
@@ -236,11 +207,6 @@ def _split_and_process(cfg: dict, fr: str, to: str, seq: List[int], level: int, 
                                    file_path=std_path,
                                    file_md5=_md5_file(std_path) if Path(std_path).exists() else "",
                                    start_time=start_ts, end_time=end_ts))
-    try:
-        if bool(cfg.get("download", {}).get("clear_chat_each_round", False)):
-            session.clear_chat_history()
-    except Exception:
-        pass
 
 
 def run(cfg: dict) -> None:
