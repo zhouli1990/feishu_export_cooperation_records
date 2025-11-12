@@ -2,7 +2,6 @@
 # - start_date/end_date：拉取的起止日期（含）；格式 YYYY-MM-DD。
 # - split_days_sequence：当机器人消息“共计”=max_count_per_file（通常为1000）时，按序缩小窗口。
 # - max_count_per_file：飞书单次导出上限，用于判断是否需要细分窗口。
-# - max_concurrency：后续并发限制的预留参数（当前阶段不启用）。
 # - retry：导出/下载时的通用重试策略（后续步骤启用）。
 # - export_headers：导出接口所需头信息，来自抓包；无需长期缓存。
 # - download：网页自动化下载相关配置（Playwright）。
@@ -17,7 +16,6 @@ end_date: "2025-10-01"
 # 时间窗口拆分设置
 split_days_sequence: [7, 3, 1]   # 命中阈值时依次缩小为7天→3天→1天
 max_count_per_file: 1000         # 机器人消息“共计”达到该值时触发细分
-max_concurrency: 2               # 并发数（后续步骤使用）
 
 # 通用重试策略（后续步骤使用）
 retry:
@@ -27,7 +25,7 @@ retry:
 # 导出接口请求头（来自抓包）
 export_headers:
   timezone_offset: -480          # 时区偏移（分钟），-480=UTC+8
-  cookie: "session=XN0YXJ0-1b2m25be-c888-44b3-9004-57ea6250f2b4-WVuZA; session_list=XN0YXJ0-a87n6145-d9bc-410f-8b57-50ed4f94ed1e-WVuZA_XN0YXJ0-1b2m25be-c888-44b3-9004-57ea6250f2b4-WVuZA_XN0YXJ0-4ecq9fde-8a23-4554-8566-5ab4e4dcb336-WVuZA_XN0YXJ0-ec5pafc3-811d-4510-ad3f-7a6403001832-WVuZA;"                     # 从抓包填写
+  cookie: "session=XN0YXJ0-1b2m25be-c888-44b3-9004-57ea6250f2b4-WVuZA;"    # 从抓包填写
   content_type: "application/json"
 
 # 网页自动化（Playwright）
